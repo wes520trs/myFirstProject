@@ -1,0 +1,5 @@
+I love coding in Java! 
+Java coding is fun. 
+Java test automation demo. 
+Test passed. 
+New file!!! 

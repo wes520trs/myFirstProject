@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password": "MaharaDemo"
+    },
+    {
+      "username": "student",
+      "password": "MaharaDemo"
+    },
+    {
+      "username": "lerner",
+      "password": "MaharaDemo"
+    },
+    {
+      "username": "staff",
+      "password": "MaharaDemo"
+    },
+    {
+      "username": "sitestaff",
+      "password": "MaharaDemo"
+    }
+  ]
+}

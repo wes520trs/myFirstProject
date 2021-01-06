@@ -177,32 +177,9 @@ public class CubeCartUtility {
         }
     }
 
-//    public void deleteReview(String title){
-//        WebElement reviewsLink = driver.findElement(By.xpath("//*[@id=\"menu_Inventory\"]/li[3]/a"));
-//        reviewsLink.click();
-//        WebElement reviewTable=driver.findElement(By.xpath("//*[@id=\"reviews\"]"));
-//        List<WebElement> reviewsList = reviewTable.findElements(By.className("note"));
-//        System.out.println("Review number is: " + reviewsList.size());
-//        for (WebElement review : reviewsList
-//        ) {
-//            if (review.getText().contains(title)) {
-//                WebElement deleteIcon = review.findElement(By.xpath("//i[contains(@title,'Delete')]"));
-//                deleteIcon.click();
-//                driver.switchTo().alert().accept();
-//                if (driver.getPageSource().contains("Review successfully deleted.")) {
-//                    System.out.println("Review successfully deleted.");
-//                } else {
-//                    System.out.println("Review can not deleted.");
-//                }
-//            } else {
-//                System.out.println("Review can not found.");
-//            }
-//        }
-//    }
-
-    public void deleteReview(String title){
-        boolean b=true;
-        do {
+    public void deleteReview(String title) {
+        boolean b = true;
+        while (b == true) {
             WebElement reviewsLink = driver.findElement(By.xpath("//*[@id=\"menu_Inventory\"]/li[3]/a"));
             reviewsLink.click();
             WebElement reviewTable = driver.findElement(By.xpath("//*[@id=\"reviews\"]"));
@@ -225,28 +202,29 @@ public class CubeCartUtility {
                 }
                 break;
             }
-        }while (b==true);
+        }
     }
+}
 
 
     //test fucntion
-    public static void main(String[] args) {
-        CubeCartUtility cubeCartUtility = new CubeCartUtility();
-        cubeCartUtility.logIn();
-//        cubeCartUtility.addProducts(3, 2);
-//        cubeCartUtility.changeBulkPrice("TRS", "10");
-        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
-                "Almost new", "This product is like new.");
-        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
-                "Almost new", "This product is like new.");
-
-        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
-                "Almost new", "This product is like new.");
-
-        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
-                "Almost new", "This product is like new.");
-////        cubeCartUtility.updateReview("Almost new","102@gmail.com");
-        cubeCartUtility.deleteReview("Almost new");
-    }
-}
+//    public static void main(String[] args) {
+//        CubeCartUtility cubeCartUtility = new CubeCartUtility();
+//        cubeCartUtility.logIn();
+////        cubeCartUtility.addProducts(3, 2);
+////        cubeCartUtility.changeBulkPrice("TRS", "10");
+//        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
+//                "Almost new", "This product is like new.");
+//        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
+//                "Almost new", "This product is like new.");
+//
+//        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
+//                "Almost new", "This product is like new.");
+//
+//        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
+//                "Almost new", "This product is like new.");
+//////        cubeCartUtility.updateReview("Almost new","102@gmail.com");
+//        cubeCartUtility.deleteReview("Almost new");
+//    }
+//}
 

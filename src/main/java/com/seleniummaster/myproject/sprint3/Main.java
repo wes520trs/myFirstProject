@@ -9,16 +9,13 @@ public class Main {
 //        cubeCartUtility.addProducts(3, 2);
 //        cubeCartUtility.changeBulkPrice("TRS", "10");
         cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
-                "Almost new", "This product is like new.");
+                "Almost new 1", "This product is like new.");
         cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
-                "Almost new", "This product is like new.");
-
-        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
-                "Almost new", "This product is like new.");
-
-        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
-                "Almost new", "This product is like new.");
+                "Almost new 2", "This product is like new.");
+//
+//        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
+//                "Almost new 3", "This product is like new.");
 ////        cubeCartUtility.updateReview("Almost new","102@gmail.com");
-        cubeCartUtility.deleteReview("Almost new");
+        cubeCartUtility.deleteReview("Tursun");
     }
 }

@@ -146,7 +146,7 @@ public class CubeCartUtility {
     public void updateReview(String title, String email) {
         WebElement reviewsLink = driver.findElement(By.xpath("//*[@id=\"menu_Inventory\"]/li[3]/a"));
         reviewsLink.click();
-        WebElement reviewTable=driver.findElement(By.xpath("//*[@id=\"reviews\"]"));
+        WebElement reviewTable = driver.findElement(By.xpath("//*[@id=\"reviews\"]"));
         List<WebElement> reviewsList = reviewTable.findElements(By.className("note"));
         // //*[@id="reviews"]/div[2]
         // //*[@id="reviews"]/div[3]
@@ -163,7 +163,7 @@ public class CubeCartUtility {
                 WebElement rating = driver.findElement(By.linkText("2"));
                 //  xpath=//a[contains(text(),'5')]
                 rating.click();
-                WebElement submitButton=driver.findElement(By.xpath("//*[@id=\"page_content\"]/form/div[2]/input[2]"));
+                WebElement submitButton = driver.findElement(By.xpath("//*[@id=\"page_content\"]/form/div[2]/input[2]"));
                 submitButton.click();
                 if (driver.getPageSource().contains("Review successfully updated.")) {
                     System.out.println("Review successfully updated.");
@@ -184,13 +184,14 @@ public class CubeCartUtility {
             reviewsLink.click();
             WebElement reviewTable = driver.findElement(By.xpath("//*[@id=\"reviews\"]"));
             List<WebElement> reviewsList = reviewTable.findElements(By.className("note"));
-            System.out.println("Review number is: " + reviewsList.size());
+            int listSize=reviewsList.size();
+            System.out.println("Review number is: " + listSize);
             for (WebElement review : reviewsList) {
                 if (review.getText().contains(title)) {
                     WebElement deleteIcon = review.findElement(By.xpath("//i[contains(@title,'Delete')]"));
                     deleteIcon.click();
                     driver.switchTo().alert().accept();
-                    ProjectUtility.sleep(3);
+                    ProjectUtility.sleep(2);
                     if (driver.getPageSource().contains("Review successfully deleted.")) {
                         System.out.println("Review successfully deleted.");
                     } else {
@@ -204,27 +205,5 @@ public class CubeCartUtility {
             }
         }
     }
+
 }
-
-
-    //test fucntion
-//    public static void main(String[] args) {
-//        CubeCartUtility cubeCartUtility = new CubeCartUtility();
-//        cubeCartUtility.logIn();
-////        cubeCartUtility.addProducts(3, 2);
-////        cubeCartUtility.changeBulkPrice("TRS", "10");
-//        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
-//                "Almost new", "This product is like new.");
-//        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
-//                "Almost new", "This product is like new.");
-//
-//        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
-//                "Almost new", "This product is like new.");
-//
-//        cubeCartUtility.addReview("TRS", "Tursun", "002@gmail.com",
-//                "Almost new", "This product is like new.");
-//////        cubeCartUtility.updateReview("Almost new","102@gmail.com");
-//        cubeCartUtility.deleteReview("Almost new");
-//    }
-//}
-

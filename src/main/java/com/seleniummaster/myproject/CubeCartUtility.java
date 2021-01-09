@@ -5,12 +5,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CubeCartUtility {
     WebDriver driver;
 
-    public void logIn() {
+    public void logIn(String username, String password) {
         System.setProperty("webdriver.chrome.driver", "c:\\webdriver\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
@@ -18,10 +19,7 @@ public class CubeCartUtility {
         driver.manage().window().maximize();
         driver.get("http://cubecart.unitedcoderschool.com/ecommerce/admin_w4vqap.php?");
         WebElement userNameBox = driver.findElement(By.id("username"));
-        //read from excel
         ProjectUtility utility = new ProjectUtility();
-        String username = utility.singleReadFromExcel("testdata\\cubecart.xlsx", "login", 1, 0);
-        String password = utility.singleReadFromExcel("testdata\\cubecart.xlsx", "login", 1, 1);
         System.out.println("Test data: " + username + ", " + password);
         userNameBox.sendKeys(username);
         WebElement passWordBox = driver.findElement(By.id("password"));
@@ -40,9 +38,9 @@ public class CubeCartUtility {
         for (int i = 1; i <= productsNum; i++) {
             ProjectUtility utility = new ProjectUtility();
             String productName = utility.singleReadFromExcel("testdata\\cubecart.xlsx",
-                    "addProduct", 0, i);
+                    "Product", 0, i);
             String price = utility.singleReadFromExcel("testdata\\cubecart.xlsx",
-                    "addProduct", 3, i);
+                    "Product", 3, i);
             System.out.println("Product name and price is: " + productName + ", " + price);
             WebElement productsLink = driver.findElement(By.xpath("//*[@id=\"nav_products\"]"));
             ProjectUtility.sleep(1);
@@ -62,7 +60,7 @@ public class CubeCartUtility {
             retailPriceArea.sendKeys(price);
             WebElement categoryTab = driver.findElement(By.xpath("//*[@id=\"tab_category\"]/a"));
             categoryTab.click();
-            WebElement categoryCheckBox = driver.findElement(By.xpath("//*[@id=\"category\"]/table/tbody/tr[8]/td[1]/input"));
+            WebElement categoryCheckBox = driver.findElement(By.xpath("//*[@id=\"category\"]/table/tbody/tr[9]/td[1]/input"));
             categoryCheckBox.click();
             WebElement saveButton = driver.findElement(By.xpath("//input[@value='Save']"));
             saveButton.click();
@@ -86,13 +84,13 @@ public class CubeCartUtility {
         WebElement bulkPriceTable = driver.findElement(By.xpath("//*[@id=\"assign\"]"));
         List<WebElement> listOfProducts = bulkPriceTable.findElements(By.tagName("tr"));
         System.out.println("number of products is: " + listOfProducts.size());
-        for (WebElement elemet : listOfProducts) {
-            if (elemet.getText().contains(keyWords)) {
-                System.out.println("my product is: " + elemet.getText());
+        for (WebElement element : listOfProducts) {
+            if (element.getText().contains(keyWords)) {
+                System.out.println("my product is: " + element.getText());
                 // //*[@id="bulk_update_products"]/div/table/tbody/tr[1]/td[1]/div/input
                 // //*[@id="bulk_update_products"]/div/table/tbody/tr[2]/td[1]/div/input
                 // //*[@id="bulk_update_products"]/div/table/tbody/tr[3]/td[1]/div/input
-                WebElement checkBox = elemet.findElement(By.name("product[]"));
+                WebElement checkBox = element.findElement(By.name("product[]"));
                 checkBox.click();
             }
         }
@@ -107,14 +105,15 @@ public class CubeCartUtility {
         }
     }
 
-    public void addReview(String productName, String reviewerName, String email, String title, String content) {
+//    public void addReview(String productName, String reviewerName, String email, String title, String content) {
+    public void addReview(ArrayList<String> review) {
         WebElement reviewsLink = driver.findElement(By.xpath("//*[@id=\"menu_Inventory\"]/li[3]/a"));
         reviewsLink.click();
         WebElement addReviewTab = driver.findElement(By.xpath("//*[@id=\"tab_control\"]/div[2]/a"));
         addReviewTab.click();
         WebElement productArea = driver.findElement(By.id("ajax_name"));
-        productArea.sendKeys(productName);
-        ProjectUtility.sleep(2);
+        productArea.sendKeys(review.get(0));
+        ProjectUtility.sleep(3);
         WebElement myProduct = productArea.findElement(By.xpath("//em"));
         // first item xpath=//em[contains(.,'TRS')] or xpath=//em
         // second item xpath=//li[2]/span or xpath=//span[@name='2']
@@ -123,13 +122,13 @@ public class CubeCartUtility {
         WebElement statusCheckBox = driver.findElement(By.xpath("//*[@id=\"review\"]/fieldset/div[2]/span/img"));
         statusCheckBox.click();
         WebElement nameArea = driver.findElement(By.id("review_name"));
-        nameArea.sendKeys(reviewerName);
+        nameArea.sendKeys(review.get(1));
         WebElement reviewerEmail = driver.findElement(By.id("review_email"));
-        reviewerEmail.sendKeys(email);
+        reviewerEmail.sendKeys(review.get(2));
         WebElement reviewTitle = driver.findElement(By.id("review_title"));
-        reviewTitle.sendKeys(title);
+        reviewTitle.sendKeys(review.get(3));
         WebElement reviewContent = driver.findElement(By.id("review_content"));
-        reviewContent.sendKeys(content);
+        reviewContent.sendKeys(review.get(4));
         WebElement rating = driver.findElement(By.linkText("4"));
         //xpath=//a[contains(text(),'4')]
         rating.click();
@@ -177,9 +176,9 @@ public class CubeCartUtility {
         }
     }
 
-    public void deleteReview(String title) {
+    public void deleteReview(String keyWrod) {
         boolean b = true;
-        while (b == true) {
+        while (b) {
             WebElement reviewsLink = driver.findElement(By.xpath("//*[@id=\"menu_Inventory\"]/li[3]/a"));
             reviewsLink.click();
             WebElement reviewTable = driver.findElement(By.xpath("//*[@id=\"reviews\"]"));
@@ -187,7 +186,7 @@ public class CubeCartUtility {
             int listSize=reviewsList.size();
             System.out.println("Review number is: " + listSize);
             for (WebElement review : reviewsList) {
-                if (review.getText().contains(title)) {
+                if (review.getText().contains(keyWrod)) {
                     WebElement deleteIcon = review.findElement(By.xpath("//i[contains(@title,'Delete')]"));
                     deleteIcon.click();
                     driver.switchTo().alert().accept();
@@ -203,6 +202,8 @@ public class CubeCartUtility {
                 }
                 break;
             }
+            if (listSize==0)
+                b=false;
         }
     }
 

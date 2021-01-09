@@ -91,9 +91,10 @@ public class ProjectUtility {
         return list;
     }
 
-    public void deleteProduct(){
+    public void writeToExcel(){
 
     }
+
 
     public static void main(String[] args) {
         ProjectUtility utility=new ProjectUtility();

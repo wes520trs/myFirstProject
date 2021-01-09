@@ -214,4 +214,9 @@ public class CubeCartUtility {
         }
     }
 
+    public void deleteProduct(){
+
+    }
+
+
 }

@@ -58,10 +58,17 @@ public class CubeCartUtility {
             pricingTab.click();
             WebElement retailPriceArea = driver.findElement(By.id("price"));
             retailPriceArea.sendKeys(price);
-            WebElement categoryTab = driver.findElement(By.xpath("//*[@id=\"tab_category\"]/a"));
-            categoryTab.click();
-            WebElement categoryCheckBox = driver.findElement(By.xpath("//*[@id=\"category\"]/table/tbody/tr[9]/td[1]/input"));
-            categoryCheckBox.click();
+            WebElement categoriesLink = driver.findElement(By.xpath("//*[@id=\"tab_category\"]/a"));
+            categoriesLink.click();
+            WebElement categoriesTable=driver.findElement(By.xpath("//*[@id=\"category\"]"));
+            List<WebElement> categoriesList=categoriesTable.findElements(By.tagName("tr"));
+            System.out.println("Number of Category is: "+categoriesList.size());
+            for (WebElement myList:categoriesList) {
+                if (myList.getText().contains("Computer-TRS")) {
+                    WebElement categoryCheckBox = myList.findElement(By.className("check-primary"));
+                    categoryCheckBox.click();
+                }
+            }
             WebElement saveButton = driver.findElement(By.xpath("//input[@value='Save']"));
             saveButton.click();
             if (driver.getPageSource().contains("successful")) {

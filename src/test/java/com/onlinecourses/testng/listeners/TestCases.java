@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 
 @Listeners(ListenerTest.class)
 
+//mvn test -Dtest=com.onlinecourses.testng.listeners.TestCases -DsuiteXMLFile=" "
+
 public class TestCases {
 
     //Test to pass as to verify listeners

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Listeners Test" verbose="1">
+    <test verbose="1" name="Listeners Test">
+<!--        <groups>-->
+<!--            <run>-->
+<!--                <include name="smoke test"/>-->
+<!--            </run>-->
+<!--        </groups>-->
+        <classes>
+            <class name="com.onlinecourses.testng.listeners.TestCases"></class>
+        </classes>
+    </test>
+</suite>
